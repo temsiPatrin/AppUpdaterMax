@@ -1,4 +1,4 @@
-package com.temsi.appupdater.enums;
+package com.temsi.appupdater;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
