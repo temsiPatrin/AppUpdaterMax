@@ -1,0 +1,3 @@
+include ':AppUpdater'
+include ':app'
+rootProject.name = "App Updater Max"
