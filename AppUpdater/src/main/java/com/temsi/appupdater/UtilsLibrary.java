@@ -69,9 +69,7 @@ class UtilsLibrary {
     }
 
     static Boolean isUpdateAvailable(Update installedVersion, Update latestVersion) {
-        if (latestVersion.getLatestVersionCode() != null && latestVersion.getLatestVersionCode() > 0) {
-            return latestVersion.getLatestVersionCode() > installedVersion.getLatestVersionCode();
-        } else {
+
             if (!TextUtils.equals(installedVersion.getLatestVersion(), "0.0.0.0") && !TextUtils.equals(latestVersion.getLatestVersion(), "0.0.0.0")) {
                 try
                 {
@@ -84,7 +82,25 @@ class UtilsLibrary {
                     return false;
                 }
             } else return false;
-        }
+
+
+//        if (latestVersion.getLatestVersionCode() != null && latestVersion.getLatestVersionCode() > 0) {
+//            return latestVersion.getLatestVersionCode() > installedVersion.getLatestVersionCode();
+//        } else {
+//            if (!TextUtils.equals(installedVersion.getLatestVersion(), "0.0.0.0") && !TextUtils.equals(latestVersion.getLatestVersion(), "0.0.0.0")) {
+//                try
+//                {
+//                    final Version installed = new Version(installedVersion.getLatestVersion());
+//                    final Version latest = new Version(latestVersion.getLatestVersion());
+//                    return installed.compareTo(latest) < 0;
+//                } catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                    return false;
+//                }
+//            } else return false;
+//        }
+
     }
 
     static Boolean isStringAVersion(String version) {

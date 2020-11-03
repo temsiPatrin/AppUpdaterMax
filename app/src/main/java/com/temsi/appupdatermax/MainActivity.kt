@@ -17,21 +17,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate() {
-        val appUpdaterUtils = AppUpdaterUtils(this)
+//        val appUpdaterUtils = AppUpdaterUtils(this)
+//            .setUpdateFrom(UpdateFrom.JSON)
+//            .setUpdateJSON("http://89.22.54.72:80/api/UpdateService/Firmware_CheckLastAlphaUpdate")
+//            .withListener(object : AppUpdaterUtils.UpdateListener {
+//                override fun onSuccess(update: Update, isUpdateAvailable: Boolean) {
+//                    Log.d("Latest Version", update.latestVersion)
+//                    Log.d("Latest Version Code", update.latestVersionCode.toString())
+//                    Log.d("URL", update.urlToDownload.toString())
+//                    Log.d("Is update available?", java.lang.Boolean.toString(isUpdateAvailable))
+//                }
+//
+//                override fun onFailed(error: AppUpdaterError) {
+//                    Log.d("AppUpdater Error", "Something went wrong")
+//                }
+//            })
+//        appUpdaterUtils.start()
+        val appUpdater = AppUpdater(this)
             .setUpdateFrom(UpdateFrom.JSON)
             .setUpdateJSON("http://89.22.54.72:80/api/UpdateService/Firmware_CheckLastAlphaUpdate")
-            .withListener(object : AppUpdaterUtils.UpdateListener {
-                override fun onSuccess(update: Update, isUpdateAvailable: Boolean) {
-                    Log.d("Latest Version", update.latestVersion)
-                    Log.d("Latest Version Code", update.latestVersionCode.toString())
-                    Log.d("URL", update.urlToDownload.toString())
-                    Log.d("Is update available?", java.lang.Boolean.toString(isUpdateAvailable))
-                }
+        appUpdater.start()
 
-                override fun onFailed(error: AppUpdaterError) {
-                    Log.d("AppUpdater Error", "Something went wrong")
-                }
-            })
-        appUpdaterUtils.start()
     }
 }
