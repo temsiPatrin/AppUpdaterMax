@@ -17,11 +17,13 @@ import com.temsi.appupdater.enums.Display;
 import com.temsi.appupdater.enums.Duration;
 import com.temsi.appupdater.enums.UpdateFrom;
 import com.temsi.appupdater.interfaces.IAppUpdater;
+import com.temsi.appupdater.interfaces.IProgressListener;
 import com.temsi.appupdater.objects.GitHub;
 import com.temsi.appupdater.objects.Update;
 
 public class AppUpdater implements IAppUpdater {
     private Context context;
+    private IProgressListener listener;
     private LibraryPreferences libraryPreferences;
     private Display display;
     private UpdateFrom updateFrom;
@@ -325,9 +327,14 @@ public class AppUpdater implements IAppUpdater {
         start();
         return this;
     }
+    public AppUpdater setProgressListener(IProgressListener listener) {
+        this.listener = listener;
+        return this;
+    }
 
     @Override
     public void start() {
+        listener.onStartAction();
         latestAppVersion = new UtilsAsync.LatestAppVersion(context, false, updateFrom, gitHub, xmlOrJsonUrl, new LibraryListener() {
             @Override
             public void onSuccess(Update update) {
@@ -374,6 +381,7 @@ public class AppUpdater implements IAppUpdater {
                             break;
                     }
                 }
+                listener.FinishAction();
             }
 
             @Override
@@ -387,6 +395,7 @@ public class AppUpdater implements IAppUpdater {
                 } else if (error == AppUpdaterError.JSON_URL_MALFORMED) {
                     throw new IllegalArgumentException("JSON file is not valid!");
                 }
+                listener.FinishAction();
             }
         });
 
@@ -442,5 +451,6 @@ public class AppUpdater implements IAppUpdater {
             return descriptionNoUpdate;
         }
     }
+
 
 }

@@ -6,10 +6,11 @@ import android.util.Log
 import com.temsi.appupdater.*
 import com.temsi.appupdater.enums.AppUpdaterError
 import com.temsi.appupdater.enums.UpdateFrom
+import com.temsi.appupdater.interfaces.IProgressListener
 import com.temsi.appupdater.objects.Update
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,8 +36,18 @@ class MainActivity : AppCompatActivity() {
 //        appUpdaterUtils.start()
         val appUpdater = AppUpdater(this)
             .setUpdateFrom(UpdateFrom.JSON)
+            .setProgressListener(object : IProgressListener{
+                override fun onStartAction() {
+                    //show progress
+                }
+                override fun FinishAction() {
+                    //hide progress
+                }
+            })
             .setUpdateJSON("http://89.22.54.72:80/api/UpdateService/Firmware_CheckLastAlphaUpdate")
         appUpdater.start()
 
     }
+
+
 }
