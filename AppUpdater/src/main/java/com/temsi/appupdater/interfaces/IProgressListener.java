@@ -2,5 +2,6 @@ package com.temsi.appupdater.interfaces;
 
 public interface IProgressListener {
     void onStartAction();
-    void FinishAction();
+    void FinishActionFailed();
+    void FinishActionSuccess();
 }

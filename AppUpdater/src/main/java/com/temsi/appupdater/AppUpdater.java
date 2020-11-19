@@ -381,7 +381,7 @@ public class AppUpdater implements IAppUpdater {
                             break;
                     }
                 }
-                listener.FinishAction();
+                listener.FinishActionSuccess();
             }
 
             @Override
@@ -395,7 +395,7 @@ public class AppUpdater implements IAppUpdater {
                 } else if (error == AppUpdaterError.JSON_URL_MALFORMED) {
                     throw new IllegalArgumentException("JSON file is not valid!");
                 }
-                listener.FinishAction();
+                listener.FinishActionFailed();
             }
         });
 

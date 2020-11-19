@@ -40,7 +40,12 @@ class MainActivity : AppCompatActivity(){
                 override fun onStartAction() {
                     //show progress
                 }
-                override fun FinishAction() {
+
+                override fun FinishActionFailed() {
+                    //hide progress
+                }
+
+                override fun FinishActionSuccess() {
                     //hide progress
                 }
             })
