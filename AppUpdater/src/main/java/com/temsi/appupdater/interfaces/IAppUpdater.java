@@ -365,6 +365,8 @@ public interface IAppUpdater {
      */
     AppUpdater setCancelable(Boolean isCancelable);
 
+    AppUpdater setProgressListener(IProgressListener listener);
+
     /**
      * Execute AppUpdater in background.
      *

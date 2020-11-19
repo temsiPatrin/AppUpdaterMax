@@ -327,6 +327,8 @@ public class AppUpdater implements IAppUpdater {
         start();
         return this;
     }
+
+    @Override
     public AppUpdater setProgressListener(IProgressListener listener) {
         this.listener = listener;
         return this;
@@ -334,7 +336,9 @@ public class AppUpdater implements IAppUpdater {
 
     @Override
     public void start() {
-        listener.onStartAction();
+        if(listener != null) {
+            listener.onStartAction();
+        }
         latestAppVersion = new UtilsAsync.LatestAppVersion(context, false, updateFrom, gitHub, xmlOrJsonUrl, new LibraryListener() {
             @Override
             public void onSuccess(Update update) {
@@ -381,7 +385,9 @@ public class AppUpdater implements IAppUpdater {
                             break;
                     }
                 }
-                listener.FinishActionSuccess();
+                if(listener != null){
+                    listener.FinishActionSuccess();
+                }
             }
 
             @Override
@@ -395,7 +401,9 @@ public class AppUpdater implements IAppUpdater {
                 } else if (error == AppUpdaterError.JSON_URL_MALFORMED) {
                     throw new IllegalArgumentException("JSON file is not valid!");
                 }
-                listener.FinishActionFailed();
+                if(listener != null) {
+                    listener.FinishActionFailed();
+                }
             }
         });
 
