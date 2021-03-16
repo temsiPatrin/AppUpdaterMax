@@ -55,7 +55,7 @@ class ParserJSON {
                 }
                 update.setReleaseNotes(builder.toString());
             }
-            String kindUrl ="http://89.22.54.72/api/UpdateService/DownloadApp?UpdateId=";
+            String kindUrl ="http://95.217.228.250:41983/api/UpdateService/DownloadApp?UpdateId=";
             URL url = new URL(kindUrl + json.getString(KEY_URL).trim());
             update.setUrlToDownload(url);
             return update;
